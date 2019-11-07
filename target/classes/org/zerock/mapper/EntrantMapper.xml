@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.EntrantMapper">
+
+	<select id="getList" resultType="org.zerock.domain.EntrantVO">
+		<![CDATA[select * from entrant ]]>
+	</select>
+	<select id="getList2" resultType="org.zerock.domain.EntrantVO">
+		<![CDATA[select * from entrant ]]>
+	</select>
+	<insert id="insert">
+		insert into entrant (seq_e,e_name,skill)
+		values (seq_e.nextval, #{e_name},#{skill})	
+	</insert>
+	
+	<insert id="insertSelectKey">
+	
+		<selectKey keyProperty="seq_e" order="BEFORE"
+			resultType="long">
+			select seq_e.nextval from dual
+		</selectKey>
+		
+		
+			insert into entrant (seq_e,e_name,skill)
+			values (seq_e.nextval, #{e_name},#{skill})
+	</insert>
+	
+	<select id="read" resultType="org.zerock.domain.EntrantVO">
+		select * from entrant where seq_e = #{seq_e}
+	</select>
+	
+	<delete id="delete">
+		delete from entrant where seq_e = #{seq_e}
+	</delete>
+	
+	<update id="update">
+		update entrant
+		set e_name=#{e_name},
+		skill=#{skill}
+		where seq_e=#{seq_e}
+	</update>
+</mapper>

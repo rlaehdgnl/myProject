@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.D_EntrantMapper">
+	
+	<insert id="insert">
+		
+		insert into D_Entrant (seq_e, seq_d, e_name)
+		values (seq_e.nextval, #{seq_d}, #{e_name})
+		
+	</insert>
+	
+	<select id="select">
+	
+		select * from D_Entrant where seq_e = #{seq_e}
+	
+	</select>
+	
+	<delete id ="delete">
+		
+		delete from D_Entrant where seq_e = #{seq_e}
+		
+	</delete>
+	
+	<update id="update">
+		
+		update D_Entrant set e_name = #{e_name}, updatedate = sysdate where seq_e = #{seq_e}
+		
+	</update>
+	
+	<select id="getList"
+		resultType="org.zerock.domain.D_EntrantVO">
+		
+		select seq_e, seq_d, e_name, entrantDate, updateDate
+		from d_entrant
+		where seq_d =#{seq_d}
+		order by seq_e asc
+			
+	</select>
+</mapper>
